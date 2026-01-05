@@ -2,6 +2,8 @@
 
 A real-time web-based rover control system built for our school Info-Day project. This system enables remote control of an omnidirectional robot through a modern web interface with live camera streaming.
 
+> **🤖 Arduino Firmware**: [HKS Rover Arduino](https://github.com/Script-hpp/hks-rover-arduino) - The firmware that runs on the rover's Arduino UNO R4 WiFi and ESP32-CAM.
+
 ## 📋 Table of Contents
 
 - [Features](#-features)
