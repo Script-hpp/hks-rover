@@ -19,7 +19,6 @@ A real-time web-based rover control system built for our school Info-Day project
 
 ### Intuitive Controls
 - **Web-based control interface** with keyboard and gamepad support for precise movement control
-- WASD keyboard controls
 - Controller support (XBOX/PS/Steam Deck/Nintendo)
 - Sensitivity adjustment
 
