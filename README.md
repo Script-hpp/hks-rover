@@ -13,6 +13,7 @@ A real-time web-based rover control system built for our school Info-Day project
 - [Usage](#-usage)
 - [Troubleshooting](#-troubleshooting)
 - [Project Structure](#-project-structure)
+- [Special Thanks](#-special-thanks)
 - [License](#-license)
 
 ## ✨ Features
