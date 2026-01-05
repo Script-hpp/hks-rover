@@ -298,14 +298,16 @@ function updateCameraFeed() {
 
             // Calculate FPS
             const currentTime = Date.now();
-            if (lastFrameTime > 0) {
-                const fps = Math.round(1000 / (currentTime - lastFrameTime));
+            const timeDiff = currentTime - lastFrameTime;
+            if (lastFrameTime > 0 && timeDiff > 0) {
+                const fps = Math.round(1000 / timeDiff);
                 if (fpsCounter) fpsCounter.textContent = `FPS: ${fps}`;
             }
             lastFrameTime = currentTime;
 
             if (cameraConnected) {
-                requestAnimationFrame(loadFrame);
+                // Throttle to ~10 FPS to prevent infinity bug
+                setTimeout(() => requestAnimationFrame(loadFrame), 100);
             }
         };
 

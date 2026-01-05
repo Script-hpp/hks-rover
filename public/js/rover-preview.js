@@ -81,11 +81,6 @@ window.addEventListener("DOMContentLoaded", () => {
     ground.receiveShadow = true;
     scene.add(ground);
 
-    // Add 3D arrow for forward direction
-    // Forward is along +X axis for your rover
-    // Place arrow between two front motors (adjust origin as needed)
-    // Forward is along -Z axis for most Blender/GLTF exports
-    // Raise the arrow above the rover for visibility
     const arrowDir = new THREE.Vector3(0, 0, -1); // Forward along -Z
     const arrowOrigin = new THREE.Vector3(0, 0.8, 0.5); // Higher Y value
     const arrowLength = 1.2;

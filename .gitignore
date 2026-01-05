@@ -4,7 +4,6 @@ node_modules/
 .pnp.js
 test_upload.js
 simulate_camera.js
-
 # Testing
 coverage/
 
