@@ -2,7 +2,7 @@
   "name": "hks-rover",
   "version": "1.0.0",
   "description": "HKS-Rover Web",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,5 +17,11 @@
   "bugs": {
     "url": "https://github.com/Script-hpp/hks-rover/issues"
   },
-  "homepage": "https://github.com/Script-hpp/hks-rover#readme"
+  "homepage": "https://github.com/Script-hpp/hks-rover#readme",
+  "dependencies": {
+    "body-parser": "^2.2.1",
+    "cors": "^2.8.5",
+    "express": "^5.2.1",
+    "multer": "^2.0.2"
+  }
 }
