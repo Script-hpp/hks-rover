@@ -18,7 +18,7 @@ A real-time web-based rover control system built for our school Info-Day project
 ### Intuitive Controls
 - **Web-based control interface** with keyboard and gamepad support for precise movement control
 - WASD keyboard controls
-- Xbox controller support
+- Controller support (XBOX/PS/Steam Deck/Nintendo)
 - Sensitivity adjustment
 
 ### Live Video Stream
@@ -82,7 +82,7 @@ This architecture allows bidirectional communication without requiring the Ardui
 
 ### Client Requirements
 - Modern web browser (Chrome, Firefox, Edge, Safari)
-- Optional: Xbox-compatible gamepad
+- Optional: Compatible gamepad (XBOX/PS/Steam Deck/Nintendo)
 
 ## 🚀 Installation
 
@@ -218,6 +218,4 @@ This project is open source and available for educational purposes.
 
 ---
 
-**Built with ❤️ by the HKS Rover Team**
-
-HKS-Rover Web
+**Web-Interface built with ❤️ by Onuralp Akca, Nam Feist**
