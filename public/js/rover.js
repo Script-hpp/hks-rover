@@ -46,6 +46,11 @@ let lastSentCommand = null;
 let lastCommandTime = 0;
 const COMMAND_THROTTLE_MS = 500; // Send commands at most every 500ms
 
+// MQTT Configuration
+const MQTT_SERVER = 'your-broker-domain.com';  // Your MQTT broker address
+const MQTT_PORT = '9001';           // WebSocket port
+const MQTT_TOPIC = 'rover/control'; // MQTT topic
+
 // DOM elements
 const mqttStatus = document.getElementById('mqtt-status');
 const gamepadStatus = document.getElementById('gamepad-status');
@@ -124,8 +129,8 @@ function updateCameraStatus(connected, message = '') {
 
 // MQTT Connection
 function connectToMQTT() {
-    const server = serverInput?.value || 'hks26.tech';
-    const port = portInput?.value || '9001';
+    const server = serverInput?.value || MQTT_SERVER;
+    const port = portInput?.value || MQTT_PORT;
 
     if (client) {
         client.end();
@@ -200,7 +205,7 @@ function sendCommand(command) {
         speed = Math.min(speed, 255); // cap at 255
     }
 
-    const topic = topicInput?.value || 'rover/control';
+    const topic = topicInput?.value || MQTT_TOPIC;
     let payload = command;
     if (['forward', 'backward', 'left', 'right', 'gas', 'stop', 'rotate-left', 'rotate-right', 'kicker'].includes(command)) {
         payload = JSON.stringify({ command, speed });

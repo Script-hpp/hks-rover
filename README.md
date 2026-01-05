@@ -114,9 +114,9 @@ You'll need an MQTT broker with the following configuration:
 Edit `public/js/rover.js` and update the MQTT broker settings:
 
 ```javascript
-const server = 'your-broker-domain.com';  // Your MQTT broker address
-const port = '9001';                       // WebSocket port
-const topic = 'rover/control';             // MQTT topic
+const MQTT_SERVER = 'your-broker-domain.com';  // Your MQTT broker address
+const MQTT_PORT = '9001';                       // WebSocket port
+const MQTT_TOPIC = 'rover/control';             // MQTT topic
 ```
 
 ### 5. Start the Server
