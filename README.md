@@ -76,6 +76,10 @@ This architecture allows bidirectional communication without requiring the Ardui
 - **MQTT Broker** (Mosquitto recommended)
 - **NGINX** (for reverse proxy and SSL termination)
 
+### Hardware Requirements
+- **ESP32-CAM** module for live video streaming
+  - Note: The ESP32-CAM has limited memory, so images must be sent in chunks to the `/api/camera/upload` endpoint
+
 ### Client Requirements
 - Modern web browser (Chrome, Firefox, Edge, Safari)
 - Optional: Xbox-compatible gamepad
@@ -102,7 +106,7 @@ You'll need an MQTT broker with the following configuration:
 - **Port 443**: MQTT over TLS (for Arduino)
 - **Port 9001**: MQTT over WebSockets (for browser)
 
-> **Note**: Setting up the MQTT broker with NGINX reverse proxy requires advanced configuration. If you're hosting this yourself, you'll need to configure Mosquitto and NGINX to handle both TLS and WebSocket connections. Contact the project maintainer for detailed broker setup instructions.
+> **Note**: Setting up the MQTT broker with NGINX reverse proxy requires advanced configuration. If you're hosting this yourself, you'll need to configure Mosquitto and NGINX to handle both TLS and WebSocket connections. Contact me for detailed broker setup instructions.
 
 ### 4. Update Configuration
 
@@ -130,16 +134,7 @@ The web interface will be available at `http://localhost:3000`
 2. Click **"Connect to MQTT Broker"** to establish connection
 3. Use the on-screen controls or keyboard/gamepad to control the rover
 
-### Keyboard Controls
 
-- **W**: Forward
-- **S**: Backward
-- **A**: Left
-- **D**: Right
-- **Q**: Rotate Left
-- **E**: Rotate Right
-- **Space**: Gas/Boost
-- **K**: Kicker
 
 ### Gamepad Controls
 
@@ -176,6 +171,7 @@ The camera feed automatically connects when you open the page. You can:
 - Ensure the ESP32-CAM is uploading frames to `/api/camera/upload`
 - Check that the image format is valid JPEG
 - Verify the camera URL is correct in the web interface
+- **Important**: The ESP32-CAM has limited memory (~4KB SRAM). Images must be captured and sent in small chunks to avoid memory overflow. Our implementation broke after extended use due to hardware limitations.
 
 ### Controls Not Responding
 **Problem**: Clicking control buttons doesn't move the rover.
