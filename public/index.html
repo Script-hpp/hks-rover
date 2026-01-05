@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rover Control System</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mqtt/4.3.7/mqtt.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+    <!-- Theme Toggle Button -->
+    <button id="themeToggle" class="theme-toggle" title="Toggle Theme">
+        <span class="dark-icon">🌙</span>
+        <span class="light-icon">☀️</span>
+    </button>
+
+    <!-- Authentication Modal Removed -->
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-title">
+                    <div class="logo">🚗</div>
+                    <h1>Rover Control System</h1>
+                </div>
+                <div class="auth-section" id="authSection" style="display: none;">
+                    <!-- Auth buttons removed -->
+                </div>
+                <div class="header-right">
+                    <div class="status-badges">
+                        <div id="mqtt-status" class="status-badge disconnected">
+                            <div class="status-indicator"></div>
+                            <span>MQTT Disconnected</span>
+                        </div>
+                        <div id="gamepad-status" class="status-badge gamepad" style="display: none">
+                            <div class="status-indicator"></div>
+                            <span>Gamepad Connected</span>
+                        </div>
+                    </div>
+                    <div id="auth-section">
+                        <!-- User info removed -->
+
+                        <button id="connectButton" class="btn btn-secondary" style="margin-left: 1rem;">
+                            Test Assign Controller
+                        </button>
+                        <button id="releaseButton" class="btn btn-secondary" style="margin-left: 1rem;">
+                            Release Controller
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <!-- Camera Section -->
+            <section class="section">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">📷 Rover Camera Feed</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="camera-container">
+                            <img id="camera-feed" class="camera-feed" alt="Camera feed" />
+                            <div id="camera-placeholder" class="camera-placeholder">
+                                <div style="font-size: 2rem">📷</div>
+                                <div>Connecting to camera...</div>
+                            </div>
+                        </div>
+
+                        <div class="camera-controls">
+                            <input type="text" id="camera-url" class="camera-url-input"
+                                placeholder="Enter camera stream URL" value="http://localhost:3000/api/camera/stream" />
+                            <button id="refresh-camera" class="btn btn-secondary">
+                                🔄
+                            </button>
+                        </div>
+                        <div class="camera-status">
+                            <div style="display: flex; align-items: center; gap: 0.5rem">
+                                <div id="camera-status-indicator" class="status-indicator"></div>
+                                <span id="camera-status-text">Camera Disconnected</span>
+                            </div>
+                            <div id="fps-counter" class="fps-counter">FPS: 0</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Controls Section -->
+            <div style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+          ">
+                <!-- Movement Controls -->
+                <section class="section">
+                    <div class="card">
+                        <!-- Unauthorized overlay removed -->
+
+                        <div class="card-header">
+                            <h2 class="card-title" style="gap: 1rem">
+                                <span style="font-size: 2rem">🎮</span>
+                                Rover Controls
+                            </h2>
+                            <div style="
+                    font-size: 0.9rem;
+                    color: var(--text-tertiary);
+                    margin-top: 0.5rem;
+                  ">
+                                Use buttons or gamepad to control the rover
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="control-grid" style="
+                    background: var(--bg-tertiary);
+                    border-radius: 12px;
+                    box-shadow: 0 2px 8px rgba(34, 197, 94, 0.08);
+                    padding: 1rem;
+                  ">
+                                <button id="forward" class="control-btn btn-movement btn-forward">
+                                    <span style="font-size: 1.25rem">⬆️</span>
+                                    <span>Forward</span>
+                                </button>
+                                <button id="left" class="control-btn btn-movement btn-left">
+                                    <span style="font-size: 1.25rem">⬅️</span>
+                                    <span>Left</span>
+                                </button>
+                                <button id="rotate-left" class="control-btn btn-special">
+                                    <span style="font-size: 1.25rem">🔄</span>
+                                    <span>Rotate Left</span>
+                                </button>
+                                <button id="stop" class="control-btn btn-stop btn-stop">
+                                    <span style="font-size: 1.25rem">⏹️</span>
+                                    <span>Stop</span>
+                                </button>
+                                <button id="right" class="control-btn btn-movement btn-right">
+                                    <span style="font-size: 1.25rem">➡️</span>
+                                    <span>Right</span>
+                                </button>
+                                <button id="rotate-right" class="control-btn btn-special">
+                                    <span style="font-size: 1.25rem">🔄</span>
+                                    <span>Rotate Right</span>
+                                </button>
+                                <button id="kick" class="control-btn kick-btn" style="grid-column: 1; grid-row: 3">
+                                    <span style="font-size: 1.25rem">⚽</span>
+                                    <span>KICK (L1)</span>
+                                </button>
+                                <button id="backward" class="control-btn btn-movement btn-backward"
+                                    style="grid-column: 2; grid-row: 3">
+                                    <span style="font-size: 1.25rem">⬇️</span>
+                                    <span>Backward</span>
+                                </button>
+                            </div>
+                            <hr style="
+                    margin: 2rem 0 1rem 0;
+                    border: none;
+                    border-top: 1px solid var(--border);
+                  " />
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Special Controls -->
+                <section class="section">
+                    <div class="card">
+                        <!-- Unauthorized overlay removed -->
+
+                        <div class="card-header">
+                            <h2 class="card-title">⚡ Special Controls</h2>
+                        </div>
+                        <div class="card-content">
+                            <div id="rover-3d-preview" style="
+                    height: 300px;
+                    background: #222;
+                    border-radius: 8px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: #aaa;
+                  ">
+                                3D Preview Coming Soon...
+                                <div id="rover-3d-preview">
+                                    <!-- Three.js canvas will be injected here by JS -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="module" src="/js/rover.js"></script>
+
+    <script type="module" src="/js/rover-preview.js"></script>
+
+</body>
+
+</html>

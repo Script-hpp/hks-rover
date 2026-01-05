@@ -2,8 +2,17 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require('body-parser');
 const multer = require("multer");
+const path = require('path');
+const fs = require('fs');
+const crypto = require('crypto');
 const app = express();
 const port = 3000;
+
+// Update upload directory
+const uploadDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir);
+}
 
 // Enable CORS for all routes
 app.use(cors({
@@ -169,9 +178,13 @@ app.get('/api/camera/stream', (req, res) => {
     }
 });
 
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public', 'index.html')));
+
+// Serve static files from the 'public' directory
+app.use(express.static('public'));
 
 app.get("/", (req, res) => {
-    res.send("Hello World!");
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.listen(port, () => {
