@@ -210,7 +210,12 @@ The Arduino code and hardware setup will be added in a separate repository.
 
 ## 📸 Gallery
 
-*Images of the rover and setup will be added soon*
+https://github.com/user-attachments/assets/USER_VIDEO_ID
+
+## 🙏 Special Thanks
+
+- **[OnlyCook](https://github.com/OnlyCook)** - For the amazing 3D rover models used in the preview
+
 
 ## 📄 License
 
@@ -219,3 +224,4 @@ This project is open source and available for educational purposes.
 ---
 
 **Web-Interface built with ❤️ by Onuralp Akca, Nam Feist**
+
