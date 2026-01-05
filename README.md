@@ -215,6 +215,8 @@ https://github.com/user-attachments/assets/USER_VIDEO_ID
 ## 🙏 Special Thanks
 
 - **[OnlyCook](https://github.com/OnlyCook)** - For the amazing 3D rover models used in the preview
+- **[Nam Feist](https://github.com/NamCraft)** - For helping with electronics and code development
+- **Herr Wilke** - Our teacher for providing the Arduino hardware and invaluable guidance throughout the project
 
 
 ## 📄 License
