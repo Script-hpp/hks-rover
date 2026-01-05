@@ -210,7 +210,7 @@ The Arduino code and hardware setup will be added in a separate repository.
 
 ## 📸 Gallery
 
-https://github.com/user-attachments/assets/USER_VIDEO_ID
+<video src="https://github.com/Script-hpp/hks-rover/raw/refs/heads/main/images/preview.mp4" controls width="100%"></video>
 
 ## 🙏 Special Thanks
 
